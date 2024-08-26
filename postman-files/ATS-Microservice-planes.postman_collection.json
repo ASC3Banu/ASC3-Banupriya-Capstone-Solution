@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "247f3153-79b1-481e-bb13-c294573e109d",
+		"name": "ATS-Microservice-planes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37369763"
+	},
+	"item": [
+		{
+			"name": "display-planes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/planes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"planes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add planes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"planeCode\":\"P0001\",\r\n    \"planeName\": \"Qatar Airways\",\r\n    \"model\": \"747-908\",\r\n    \"capacity\": 660,\r\n    \"manufacturer\": \"GE AeroSpace\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/planes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"planes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/planes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"planes",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

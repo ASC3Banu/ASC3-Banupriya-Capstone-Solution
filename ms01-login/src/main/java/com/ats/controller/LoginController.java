@@ -86,4 +86,9 @@ public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         userService.registerUser(user);
         return ResponseEntity.ok("User registered successfully.");
     }
+
+    public ResponseEntity<String> login(String mail, String s) {
+
+        return null;
+    }
 }

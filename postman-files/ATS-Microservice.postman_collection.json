@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "dec6ce22-f03d-46bd-862e-c09ba4c8e28a",
+		"name": "ATS-Microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37369763"
+	},
+	"item": [
+		{
+			"name": "post booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingId\":\"B0004\" ,\r\n    \"scheduleId\": 101,\r\n    \"bookingDate\": \"2024-08-22\",\r\n    \"seatNumber\": \"13A\",\r\n    \"ticketCost\": 200.0,\r\n    \"totalAmount\": 250.0,\r\n    \"departureDateTime\": \"2024-08-23T14:30:00\",\r\n    \"arrivalDateTime\": \"2024-08-23T16:30:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8087/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8087",
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get booking by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8087/bookings/id/B0003",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8087",
+					"path": [
+						"bookings",
+						"id",
+						"B0003"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Booking",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8087/bookings/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8087",
+					"path": [
+						"bookings",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchbydate",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
