@@ -1,6 +1,8 @@
 package com.ats.controller;
 
 //import com.ats.client.BookingClient;
+import com.ats.client.Booking;
+import com.ats.client.BookingClient;
 import com.ats.entity.User;
 import com.ats.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,37 +51,58 @@ public class LoginController {
 //
 //        return ResponseEntity.badRequest().body("User not found.");
 //    }
-@PostMapping("/login")
-public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
-    String email = loginRequest.getEmail();
-    String password = loginRequest.getPassword();
+//@PostMapping("/login")
+//public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+//    String email = loginRequest.getEmail();
+//    String password = loginRequest.getPassword();
+//
+//    Optional<User> optionalUser = userService.findByEmail(email);
+//
+//    if (optionalUser.isPresent()) {
+//        User user = optionalUser.get();
+//
+//        if (user.isAccountLocked()) {
+//            if (userService.unlockWhenTimeExpired(user)) {
+//                return ResponseEntity.badRequest().body("Account was locked, now unlocked. Please try logging in again.");
+//            } else {
+//                return ResponseEntity.badRequest().body("Account locked. Please try again later.");
+//            }
+//        }
+//
+//        if (passwordEncoder.matches(password, user.getPassword())) {
+//            userService.resetFailedAttempts(email);
+//            //String bookings = bookingClient.getBookingsForUser(user.getId());
+//            //return ResponseEntity.ok("Login successful. Booking Details: " + bookings);
+//            return ResponseEntity.ok("Login successful. Welcome to the application menu.");
+//        } else {
+//            userService.increaseFailedAttempts(user);
+//            return ResponseEntity.badRequest().body("Invalid credentials. Attempt " + user.getFailedAttempts() + " of 3.");
+//        }
+//    }
+//
+//    return ResponseEntity.badRequest().body("User not found.");
+//}
 
-    Optional<User> optionalUser = userService.findByEmail(email);
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestParam String email, @RequestParam String password) {
+        Optional<User> optionalUser = userService.findByEmail(email);
 
-    if (optionalUser.isPresent()) {
-        User user = optionalUser.get();
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
 
-        if (user.isAccountLocked()) {
-            if (userService.unlockWhenTimeExpired(user)) {
-                return ResponseEntity.badRequest().body("Account was locked, now unlocked. Please try logging in again.");
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                userService.resetFailedAttempts(email);
+                BookingClient bookingClient = null;
+                Booking booking = bookingClient.getBookingById("exampleBookingId"); // Example booking ID
+                return ResponseEntity.ok("Login successful. Booking: " + booking.toString());
             } else {
-                return ResponseEntity.badRequest().body("Account locked. Please try again later.");
+                userService.increaseFailedAttempts(user);
+                return ResponseEntity.badRequest().body("Invalid credentials.");
             }
         }
 
-        if (passwordEncoder.matches(password, user.getPassword())) {
-            userService.resetFailedAttempts(email);
-            //String bookings = bookingClient.getBookingsForUser(user.getId());
-            //return ResponseEntity.ok("Login successful. Booking Details: " + bookings);
-            return ResponseEntity.ok("Login successful. Welcome to the application menu.");
-        } else {
-            userService.increaseFailedAttempts(user);
-            return ResponseEntity.badRequest().body("Invalid credentials. Attempt " + user.getFailedAttempts() + " of 3.");
-        }
+        return ResponseEntity.badRequest().body("User not found.");
     }
-
-    return ResponseEntity.badRequest().body("User not found.");
-}
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@Valid @RequestBody User user) {
@@ -87,8 +110,8 @@ public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok("User registered successfully.");
     }
 
-    public ResponseEntity<String> login(String mail, String s) {
+    //public ResponseEntity<String> login(String mail, String s) {
 
-        return null;
-    }
+        //return null;
+    //}
 }

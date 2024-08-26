@@ -20,7 +20,8 @@ public class User {
 
     @NotBlank(message = "Password cannot be blank")
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$",
-            message = "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character")
+            message = "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one " +
+                    "special character")
     @Column(nullable = false)
     private String password;
 
